@@ -20,6 +20,7 @@ e = 0.99;
 
 out = rxd(X);
 % out = rxd_S(X);
+% out = wscf(X);
 % out = lad_Q(X);
 % out = lad_Q_S(X);
 % out = lad_C(X);

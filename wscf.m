@@ -46,7 +46,7 @@ for r = 1:sz(1)
             snb = snb + (xi*xj')/xi2;
         end
 
-        out(i) = norm(xi) * (1 + alpha * snb);
+        out(i) = xi2 * (1 + alpha * snb);
     end
 end
 
