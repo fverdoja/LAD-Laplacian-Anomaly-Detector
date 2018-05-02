@@ -4,15 +4,16 @@ clear;
 %% Algorithms and parameters
 % Comment the lines of the algs array for the algorithms that aren't to be 
 % tested.
-algs = {
-    @rxd, @rxd_S, ...
-    @wscf, ...
-    @lad_Q, @lad_Q_S, ...
-    @lad_C, @lad_C_S, ...
-    @rxd_PCA, @rxd_PCA_S, ...
-    @lad_Q_PCA, @lad_Q_PCA_S, ...
-    @lad_C_PCA, @lad_C_PCA_S, ...
-    };
+% algs = {
+%     @rxd, @rxd_S, ...
+%     @wscf, @rsad, ...
+%     @lad_Q, @lad_Q_S, ...
+%     @lad_C, @lad_C_S, ...
+%     @rxd_PCA, @rxd_PCA_S, ...
+%     @lad_Q_PCA, @lad_Q_PCA_S, ...
+%     @lad_C_PCA, @lad_C_PCA_S, ...
+%     };
+algs = {@rxd, @wscf, @rsad, @lad_Q, @lad_Q_S, @lad_C, @lad_C_S};
 % e is the energy to be preserved for the PCA-like methods
 e = 0.99;
 % pp is an array containing all threshold to be tested as percentage of the
@@ -34,27 +35,37 @@ all_roc_IMPL4 = zeros([length(pp) length(algs) 2]);
 disp('########### IMPLANTED 4');
 for i = 1:length(algs)
     disp(['## ' func2str(algs{i})]);
-    if nargin(algs{i}) == 1
+    if nargin(algs{i}) == 1 % used for most algorithms
         out = algs{i}(X);
         t = -1;
-    else
+    elseif nargin(algs{i}) == 2 % used for PCA-like algorithms
         [out, t] = algs{i}(X, e);
+    else % used for RSAD
+        alpha = nnz(gt)/numel(gt)
+        out = algs{i}(X, alpha);
+        t = -1;
     end
     
-    this_p = 0;
-    this_res = metrics(out>=0, gt);
-    this_roc = zeros([length(pp) 2]);
-    j = 1;
-    for p = pp
-        restemp = metrics(out>max(out(:))*p, gt);
-        this_roc(j,1) = restemp(4);
-        this_roc(j,2) = restemp(3);
-        j=j+1;
-        if restemp(7) > this_res(7)
-            this_res = restemp;
-            this_p = p;
+    if islogical(out)
+        this_p = -1;
+        this_res = metrics(out, gt);
+        this_roc = zeros([length(pp) 2]);
+    else
+        this_p = 0;
+        this_res = metrics(out>=0, gt);
+        this_roc = zeros([length(pp) 2]);
+        j = 1;
+        for p = pp
+            restemp = metrics(out>max(out(:))*p, gt);
+            this_roc(j,1) = restemp(4);
+            this_roc(j,2) = restemp(3);
+            j=j+1;
+            if restemp(7) > this_res(7)
+                this_res = restemp;
+                this_p = p;
+            end
+    %         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
         end
-%         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
     end
     
     all_res_IMPL4(i) = this_res(7);
@@ -81,27 +92,37 @@ all_roc_REAL = zeros([length(pp) length(algs) 2]);
 disp('########### NORMAL');
 for i = 1:length(algs)
     disp(['## ' func2str(algs{i})]);
-    if nargin(algs{i}) == 1
+    if nargin(algs{i}) == 1 % used for most algorithms
         out = algs{i}(X);
         t = -1;
-    else
+    elseif nargin(algs{i}) == 2 % used for PCA-like algorithms
         [out, t] = algs{i}(X, e);
+    else % used for RSAD
+        alpha = nnz(gt)/numel(gt)
+        out = algs{i}(X, alpha);
+        t = -1;
     end
     
-    this_p = 0;
-    this_res = metrics(out>=0, gt);
-    this_roc = zeros([length(pp) 2]);
-    j = 1;
-    for p = pp
-        restemp = metrics(out>max(out(:))*p, gt);
-        this_roc(j,1) = restemp(4);
-        this_roc(j,2) = restemp(3);
-        j=j+1;
-        if restemp(7) > this_res(7)
-            this_res = restemp;
-            this_p = p;
+    if islogical(out)
+        this_p = -1;
+        this_res = metrics(out, gt);
+        this_roc = zeros([length(pp) 2]);
+    else
+        this_p = 0;
+        this_res = metrics(out>=0, gt);
+        this_roc = zeros([length(pp) 2]);
+        j = 1;
+        for p = pp
+            restemp = metrics(out>max(out(:))*p, gt);
+            this_roc(j,1) = restemp(4);
+            this_roc(j,2) = restemp(3);
+            j=j+1;
+            if restemp(7) > this_res(7)
+                this_res = restemp;
+                this_p = p;
+            end
+    %         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
         end
-%         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
     end
     
     all_res_REAL(i) = this_res(7);
@@ -128,27 +149,37 @@ all_roc_IMPL14 = zeros([length(pp) length(algs) 2]);
 disp('########### IMPLANTED 14');
 for i = 1:length(algs)
     disp(['## ' func2str(algs{i})]);
-    if nargin(algs{i}) == 1
+    if nargin(algs{i}) == 1 % used for most algorithms
         out = algs{i}(X);
         t = -1;
-    else
+    elseif nargin(algs{i}) == 2 % used for PCA-like algorithms
         [out, t] = algs{i}(X, e);
+    else % used for RSAD
+        alpha = nnz(gt)/numel(gt)
+        out = algs{i}(X, alpha);
+        t = -1;
     end
     
-    this_p = 0;
-    this_res = metrics(out>=0, gt);
-    this_roc = zeros([length(pp) 2]);
-    j = 1;
-    for p = pp
-        restemp = metrics(out>max(out(:))*p, gt);
-        this_roc(j,1) = restemp(4);
-        this_roc(j,2) = restemp(3);
-        j=j+1;
-        if restemp(7) > this_res(7)
-            this_res = restemp;
-            this_p = p;
+    if islogical(out)
+        this_p = -1;
+        this_res = metrics(out, gt);
+        this_roc = zeros([length(pp) 2]);
+    else
+        this_p = 0;
+        this_res = metrics(out>=0, gt);
+        this_roc = zeros([length(pp) 2]);
+        j = 1;
+        for p = pp
+            restemp = metrics(out>max(out(:))*p, gt);
+            this_roc(j,1) = restemp(4);
+            this_roc(j,2) = restemp(3);
+            j=j+1;
+            if restemp(7) > this_res(7)
+                this_res = restemp;
+                this_p = p;
+            end
+    %         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
         end
-%         disp(['p: ' num2str(p) ' - SOI: ' num2str(restemp(7))]);
     end
     
     all_res_IMPL14(i) = this_res(7);

@@ -1,15 +1,16 @@
 function out = wscf(X)
-%RXD     WSCF Detector
-%   This function implements the WSCF Detector. Given the image X, it 
-%   returns the likelihood map of each pixel to be anomalous. Alpha is set 
-%   to 0.2, as proposed by the original authors.
+%WSCF     Whitening Spatial Correlation Filtering Detector
+%   This function implements the WSCF Detector (Gaucel, Guillaume, & 
+%   Bourennane, 2005). Given the image X, it returns the likelihood map of 
+%   each pixel to be anomalous. Alpha is set to 0.2, as proposed by the 
+%   original authors.
 %
 %   References:
-%   J. M. Gaucel, M. Guillaume, and S. Bourennane, "Whitening spatial 
-%       correlation filtering for hyperspectral anomaly detection," in 
-%       Proceedings. (ICASSP ’05). IEEE International Conference on 
-%       Acoustics, Speech, and Signal Processing, 2005., 2005, vol. 5, p. 
-%       v/333-v/336 Vol. 5.
+%   Gaucel, J. M., Guillaume, M., & Bourennane, S. (2005). Whitening
+%       spatial correlation filtering for hyperspectral anomaly detection. 
+%       In Proceedings. (ICASSP ’05). IEEE International Conference on
+%       Acoustics, Speech, and Signal Processing, 2005. (Vol. 5, 
+%       p. v/333-v/336).
 
 alpha = 0.2;
 
