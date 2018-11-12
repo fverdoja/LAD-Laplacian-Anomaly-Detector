@@ -24,8 +24,6 @@ pp = 0:0.02:1;
 %% Implanted anomaly 4
 load('salinas_impl_4.mat');
 load('salinas_impl_gt.mat');
-X = o(75:200,:,:);
-gt = g(75:200,:,:);
 
 all_res_IMPL4 = zeros([1 length(algs)]);
 all_t_IMPL4   = zeros([1 length(algs)]);
@@ -81,8 +79,6 @@ end
 %% Real anomaly
 load('salinas.mat');
 load('salinas_gt.mat');
-X = sal(1:150,:,:);
-gt = sal_gt(1:150,:,:);
 
 all_res_REAL = zeros([1 length(algs)]);
 all_t_REAL   = zeros([1 length(algs)]);
@@ -138,8 +134,6 @@ end
 %% Implanted anomaly 14
 load('salinas_impl_14.mat');
 load('salinas_impl_gt.mat');
-X = o(75:200,:,:);
-gt = g(75:200,:,:);
 
 all_res_IMPL14 = zeros([1 length(algs)]);
 all_t_IMPL14   = zeros([1 length(algs)]);

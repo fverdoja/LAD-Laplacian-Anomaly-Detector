@@ -3,13 +3,14 @@ clear;
 
 %% Load images
 load('salinas_impl_4.mat');
-X = o(75:200,:,:);
-
+X2 = X;
 load('salinas_impl_14.mat');
-X2 = o(75:200,:,:);
 
 load('salinas_impl_gt.mat');
-gt = g(75:200,:,:);
+
+% load('salinas.mat');
+% load('salinas_gt.mat');
+% X2 = X;
 
 %% Parameter
 % If N = 0, mean and std of all points in a region are plotted

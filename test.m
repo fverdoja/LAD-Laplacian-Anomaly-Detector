@@ -3,17 +3,13 @@ clear;
 
 %% Implanted anomaly
 % load('salinas_impl_4.mat');
-load('salinas_impl_14.mat');
-
-load('salinas_impl_gt.mat');
-X = o(75:200,:,:);
-gt = g(75:200,:,:);
+% load('salinas_impl_14.mat');
+% 
+% load('salinas_impl_gt.mat');
 
 %% Real anomaly
-% load('salinas.mat');
-% load('salinas_gt.mat');
-% X = sal(1:150,:,:);
-% gt = sal_gt(1:150,:,:);
+load('salinas.mat');
+load('salinas_gt.mat');
 
 %% Detector
 e = 0.99;
