@@ -18,8 +18,8 @@ if ~exist('max_iter','var')
     max_iter = 20;
 end
 
-N = 100;
-L = 17;
+N = 80;
+L = 40;
 
 sz = size(X);
 n = sz(1)*sz(2);
@@ -55,10 +55,14 @@ for l = 1:L
         c_np = 1 + (p + 1) / (n - p) + 1 / (n - h - p);
         c_npr = c_hr + c_np;
         
-        %histogram(o, 10:0.01:20); drawnow
-        t = sqrt(chi2inv(1-alpha,p)) * c_npr; % Threshold
+        % Threshold
+        % t = sqrt(chi2inv(1 - alpha/n, p)) * c_npr;
+        t = sqrt(2 * gammaincinv(alpha/n, p/2, 'upper')) * c_npr;
+        % this way of computing the threshold is numerically more stable 
+        % than by using chi2inv at the upper end of the curve.
+        % However, it is algebrically equivalent.
         
-        i_new = find(o <= t);
+        i_new = find(o < t);
         
         if isequal(ii,i_new)
             stop = true;
@@ -68,9 +72,9 @@ for l = 1:L
         end
     end
     
-    out = out + (o > t);
+    out = out + (o >= t);
 end
 
-out = out > L/2; % Pixels are defined anomalous through majority voting
+out = out >= L/2; % Pixels are defined anomalous through majority voting
 out = reshape(out, [sz(1),sz(2)]);
 end
