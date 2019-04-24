@@ -41,8 +41,8 @@ pp = 0:0.02:1;
 
 %% Implanted anomaly 4
 if tests.IMPL4
-    load('salinas_impl_4.mat');
-    load('salinas_impl_gt.mat');
+    load('data/salinas/salinas_impl_4.mat');
+    load('data/salinas/salinas_impl_gt.mat');
 
     all_res_IMPL4 = zeros([1 length(algs_names)]);
     all_t_IMPL4   = zeros([1 length(algs_names)]);
@@ -106,8 +106,8 @@ end
 
 %% Implanted anomaly 14
 if tests.IMPL14
-    load('salinas_impl_14.mat');
-    load('salinas_impl_gt.mat');
+    load('data/salinas/salinas_impl_14.mat');
+    load('data/salinas/salinas_impl_gt.mat');
 
     all_res_IMPL14 = zeros([1 length(algs_names)]);
     all_t_IMPL14   = zeros([1 length(algs_names)]);
@@ -171,8 +171,8 @@ end
 
 %% Real anomaly
 if tests.REAL
-    load('salinas.mat');
-    load('salinas_gt.mat');
+    load('data/salinas/salinas.mat');
+    load('data/salinas/salinas_gt.mat');
 
     all_res_REAL = zeros([1 length(algs_names)]);
     all_t_REAL   = zeros([1 length(algs_names)]);
