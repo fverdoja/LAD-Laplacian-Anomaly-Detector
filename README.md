@@ -16,5 +16,4 @@ The code should run on any version of Matlab 2014+
 
 ## Use
 
-* `test.m` tests on a single scenario (implanted 14, implanted 4 or real)
-* `test_all.m` tests all algorithms on all scenarios
+`test_all.m` tests any of the implemented algorithms on any of the included testing scenarios.
