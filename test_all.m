@@ -247,7 +247,7 @@ if tests.URBAN1
     all_p_ABU1   = zeros([1 length(algs_names)]);
     all_roc_ABU1 = zeros([length(pp) length(algs_names) 2]);
 
-    disp('########### Urban 1');
+    disp('########### URBAN 1');
     for i = 1:length(algs_names)
         alg_name = algs_names{i};
         alg_f = algs(1).(alg_name);
@@ -313,7 +313,7 @@ if tests.URBAN2
     all_p_ABU2   = zeros([1 length(algs_names)]);
     all_roc_ABU2 = zeros([length(pp) length(algs_names) 2]);
 
-    disp('########### ABU');
+    disp('########### URBAN 2');
     for i = 1:length(algs_names)
         alg_name = algs_names{i};
         alg_f = algs(1).(alg_name);
