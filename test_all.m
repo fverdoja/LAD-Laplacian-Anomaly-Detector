@@ -36,6 +36,8 @@ tests = struct( ...
 
 % e is the energy to be preserved for the PCA-like methods
 e = 0.99;
+% alpha parameter for RSAD
+alpha = 0.001;
 % pp is an array containing all threshold to be tested as percentage of the
 % max distance.
 pp = 0:0.02:1;
@@ -65,14 +67,12 @@ if tests.IMPL4
             elseif nargin(alg_f) == 2 % used for PCA-like algorithms
                 [out, t] = alg_f(X, e);
             else % used for RSAD
-                alpha = nnz(gt)/numel(gt)
                 out = alg_f(X, alpha);
                 t = -1;
             end
             toc
             
             if islogical(out)
-                imshow(out); drawnow
                 this_p = -1;
                 this_res = metrics(out, gt);
                 this_roc = zeros([length(pp) 2]);
@@ -130,14 +130,12 @@ if tests.IMPL14
             elseif nargin(alg_f) == 2 % used for PCA-like algorithms
                 [out, t] = alg_f(X, e);
             else % used for RSAD
-                alpha = nnz(gt)/numel(gt)
                 out = alg_f(X, alpha);
                 t = -1;
             end
             toc
             
             if islogical(out)
-                imshow(out); drawnow
                 this_p = -1;
                 this_res = metrics(out, gt);
                 this_roc = zeros([length(pp) 2]);
@@ -195,14 +193,12 @@ if tests.REAL
             elseif nargin(alg_f) == 2 % used for PCA-like algorithms
                 [out, t] = alg_f(X, e);
             else % used for RSAD
-                alpha = nnz(gt)/numel(gt)
                 out = alg_f(X, alpha);
                 t = -1;
             end
             toc
             
             if islogical(out)
-                imshow(out); drawnow
                 this_p = -1;
                 this_res = metrics(out, gt);
                 this_roc = zeros([length(pp) 2]);
@@ -261,14 +257,12 @@ if tests.URBAN1
             elseif nargin(alg_f) == 2 % used for PCA-like algorithms
                 [out, t] = alg_f(X, e);
             else % used for RSAD
-                alpha = nnz(gt)/numel(gt)
                 out = alg_f(X, alpha);
                 t = -1;
             end
             toc
             
             if islogical(out)
-                imshow(out); drawnow
                 this_p = -1;
                 this_res = metrics(out, gt);
                 this_roc = zeros([length(pp) 2]);
@@ -327,14 +321,12 @@ if tests.URBAN2
             elseif nargin(alg_f) == 2 % used for PCA-like algorithms
                 [out, t] = alg_f(X, e);
             else % used for RSAD
-                alpha = nnz(gt)/numel(gt)
                 out = alg_f(X, alpha);
                 t = -1;
             end
             toc
             
             if islogical(out)
-                imshow(out); drawnow
                 this_p = -1;
                 this_res = metrics(out, gt);
                 this_roc = zeros([length(pp) 2]);
